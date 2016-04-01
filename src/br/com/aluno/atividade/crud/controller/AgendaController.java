@@ -49,11 +49,11 @@ public class AgendaController {
 	}
 	
 
-	public Agenda getModelo() {
+	public Agenda getAgenda() {
 		return agenda;
 	}
 
-	public void setModelo(Agenda agenda) {
+	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
 	}
 
