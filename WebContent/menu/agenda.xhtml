@@ -29,7 +29,7 @@
 					<p:inputText id="sal" value="#{agendaController.agenda.salario}"/>
 				</h:panelGrid>
 				
-					<p:messages showDetail="true"/>
+					<!-- <p:messages showDetail="true"/> -->
     				<p:captcha label="Captcha" publicKey="6Ld7pMESAAAAAHd1VihJkqPUXAJVwU3Cghc8fzrq" />
     				<!-- <p:commandButton value="Check" actionListener="#{CaptchaView.submit}" 
     					ajax="false" icon="ui-icon-check" /> --> 
@@ -41,11 +41,38 @@
 	  			<br/>  <br/>
 	  			
 	  			<p:dataTable 
+	  						id="tbl"
 	  						value="#{agendaController.consultar()}"
 	  						var="agenda"
 	  						emptyMessage="Nenhum contato cadastrado"
+	  						paginatorTemplate="{CurrentPageReport}  {FirstPageLink}
+	  										{PreviousPageLink} {PageLinks} {NextPageLink}
+	  										{LastPageLink} {Exporters}"
 	  						paginator="true"
-	  						rows="15">
+	  						rows="15"
+	  						style="margin-bottom:20px">
+	  						
+	  				<!-- <f:facet name="{Exporters}">
+            		<h:commandLink>
+                		<p:graphicImage name="/img/excel.ico" width="24"/>
+                		<p:dataExporter type="xls" target="tbl" fileName="agenda" />
+            		</h:commandLink>
+ 
+            		<h:commandLink>
+                		<p:graphicImage name="/img/pdf.png" width="24"/>
+                		<p:dataExporter type="pdf" target="tbl" fileName="agenda"/>
+            		</h:commandLink>
+ 
+            		<h:commandLink>
+                		<p:graphicImage name="/img/csv.png" width="24"/>
+                		<p:dataExporter type="csv" target="tbl" fileName="agenda" />
+            		</h:commandLink>
+ 
+            		<h:commandLink>
+                		<p:graphicImage name="/img/xml.png" width="24"/>
+                		<p:dataExporter type="xml" target="tbl" fileName="agenda" />
+            		</h:commandLink>
+        		</f:facet> -->
 	  						
 	  						<p:column headerText="Matrícula">
 	  							#{agenda.matricula}
