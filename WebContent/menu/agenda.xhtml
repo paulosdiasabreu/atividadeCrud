@@ -2,16 +2,91 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core"
 	  template="/template.xhtml">
 	  
 	<ui:define name="conteudo">
 		<p:panel>
 			<h:form>
-				<p:growl />
+				<p:growl />	
 				<h:panelGrid columns="2">
-					<h:outputLabel for="matricula" value="Matrícula"/>
-					<p:inputText id="matricula" value="#{agendaController.agenda.matricula}" required="true"/>
+					
+					<p:outputLabel for="matricula" value="Matrícula"/>
+					<p:inputMask id="matricula" mask="99999"
+						value="#{agendaController.agenda.matricula}" required="true"/>
+					
+					<p:outputLabel for="name" value="Nome:"/>
+					<p:inputText id="name" value="#{agendaController.agenda.nome}"/>
+						
+					<p:outputLabel for="dtNasc" value="Data de nascimento:"/>
+					<p:calendar id="dtNasc" value="#{agendaController.agenda.dataNascimento}"/>
+					
+					<p:outputLabel for="cpf" value="CPF:"/>
+					<p:inputMask mask="999.999.999-99" id="cpf" 
+						value="#{agendaController.agenda.CPF}"/>
+						
+					<p:outputLabel for="sal" value="Salário:"/>
+					<p:inputText id="sal" value="#{agendaController.agenda.salario}"/>
 				</h:panelGrid>
+				
+					<p:messages showDetail="true"/>
+    				<p:captcha label="Captcha" publicKey="6Ld7pMESAAAAAHd1VihJkqPUXAJVwU3Cghc8fzrq" />
+    				<!-- <p:commandButton value="Check" actionListener="#{CaptchaView.submit}" 
+    					ajax="false" icon="ui-icon-check" /> --> 
+				
+				<p:commandButton value="Salvar"
+	  					actionListener="#{agendaController.salvar()}"
+	  					update="@form" />
+	  			
+	  			<br/>  <br/>
+	  			
+	  			<p:dataTable 
+	  						value="#{agendaController.consultar()}"
+	  						var="agenda"
+	  						emptyMessage="Nenhum contato cadastrado"
+	  						paginator="true"
+	  						rows="15">
+	  						
+	  						<p:column headerText="Matrícula">
+	  							#{agenda.matricula}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Nome">
+	  							#{agenda.nome}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Data de nascimento">
+	  							<h:outputLabel value="#{agenda.dataNascimento}">
+	  								<f:convertDateTime pattern="dd/MM/yyyy"/>
+	  							</h:outputLabel>
+	  							<!-- #{agenda.dataNascimento} -->
+	  						</p:column>
+	  						
+	  						<p:column headerText="CPF">
+	  							#{agenda.CPF}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Salário">
+	  							#{agenda.salario}
+	  						</p:column>
+	  						
+	  						<p:column>
+	  							<p:commandButton 
+	  								icon="fa fa-edit"
+	  								actionListener="#{agendaController.editar(agenda)}"
+	  								update="@form"
+	  								process="@this"/>
+	  						
+	  							<p:commandButton 
+	  								icon="fa fa-remove"
+	  								actionListener="#{agendaController.excluir(agenda)}"
+	  								update="@form"
+	  								process="@this"/>
+	  						</p:column>
+	  						
+	  				
+	  				</p:dataTable>
+				
 			</h:form>
 		</p:panel>
 	</ui:define>
