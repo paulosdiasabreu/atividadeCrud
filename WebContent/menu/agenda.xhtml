@@ -29,9 +29,9 @@
 					<p:inputText id="sal" value="#{agendaController.agenda.salario}"/>
 				</h:panelGrid>
 				
-					<!-- <p:messages showDetail="true"/> -->
+					<!-- <p:messages showDetail="true"/> 
     				<p:captcha label="Captcha" publicKey="6Ld7pMESAAAAAHd1VihJkqPUXAJVwU3Cghc8fzrq" />
-    				<!-- <p:commandButton value="Check" actionListener="#{CaptchaView.submit}" 
+    				<p:commandButton value="Check" actionListener="#{CaptchaView.submit}" 
     					ajax="false" icon="ui-icon-check" /> --> 
 				
 				<p:commandButton value="Salvar"
@@ -52,52 +52,66 @@
 	  						rows="15"
 	  						style="margin-bottom:20px">
 	  						
-	  				<!-- <f:facet name="{Exporters}">
-            		<h:commandLink>
-                		<p:graphicImage name="/img/excel.ico" width="24"/>
+	  				<f:facet name="{Exporters}">
+            		<h:commandLink immediate="true">
+                		<p:graphicImage url="/img/excel.ico" width="24"/>
                 		<p:dataExporter type="xls" target="tbl" fileName="agenda" />
             		</h:commandLink>
  
-            		<h:commandLink>
-                		<p:graphicImage name="/img/pdf.png" width="24"/>
+            		<h:commandLink immediate="true">
+                		<p:graphicImage url="/img/pdf.png" width="24"/>
                 		<p:dataExporter type="pdf" target="tbl" fileName="agenda"/>
             		</h:commandLink>
  
-            		<h:commandLink>
-                		<p:graphicImage name="/img/csv.png" width="24"/>
+            		<h:commandLink immediate="true">
+                		<p:graphicImage url="/img/csv.png" width="24"/>
                 		<p:dataExporter type="csv" target="tbl" fileName="agenda" />
             		</h:commandLink>
  
-            		<h:commandLink>
-                		<p:graphicImage name="/img/xml.png" width="24"/>
+            		<h:commandLink immediate="true">
+                		<p:graphicImage url="/img/xml.png" width="24"/>
                 		<p:dataExporter type="xml" target="tbl" fileName="agenda" />
             		</h:commandLink>
-        		</f:facet> -->
+        		</f:facet>
 	  						
-	  						<p:column headerText="Matrícula">
-	  							#{agenda.matricula}
-	  						</p:column>
-	  						
-	  						<p:column headerText="Nome">
-	  							#{agenda.nome}
-	  						</p:column>
-	  						
-	  						<p:column headerText="Data de nascimento">
-	  							<h:outputLabel value="#{agenda.dataNascimento}">
-	  								<f:convertDateTime pattern="dd/MM/yyyy"/>
-	  							</h:outputLabel>
-	  							<!-- #{agenda.dataNascimento} -->
-	  						</p:column>
-	  						
-	  						<p:column headerText="CPF">
-	  							#{agenda.CPF}
-	  						</p:column>
-	  						
-	  						<p:column headerText="Salário">
-	  							#{agenda.salario}
+	  						<p:column >
+	  							<f:facet name="header">
+	  								<h:outputText value="Matrícula"/>
+	  							</f:facet>
+	  							<h:outputText value="#{agenda.matricula}"/>
 	  						</p:column>
 	  						
 	  						<p:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="Nome" />
+	  							</f:facet>
+	  							<h:outputText value="#{agenda.nome}" />
+	  						</p:column>
+	  						
+	  						<p:column>
+	  							<f:facet name="header">
+	  								<h:outputLabel value="Data de nascimento" />
+	  							</f:facet>
+	  							<h:outputText value="#{agenda.dataNascimento}" >
+	  								<f:convertDateTime pattern="dd/MM/yyyy"/>
+	  							</h:outputText>
+	  						</p:column>
+	  						
+	  						<p:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="CPF" />
+	  							</f:facet>
+	  							<h:outputText value="#{agenda.CPF}" />
+	  						</p:column>
+	  						
+	  						<p:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="Salário" />
+	  							</f:facet>
+	  							<h:outputText value="#{agenda.salario}" />
+	  						</p:column>
+	  						
+	  						<p:column exportable="false">
 	  							<p:commandButton 
 	  								icon="fa fa-edit"
 	  								actionListener="#{agendaController.editar(agenda)}"
@@ -111,9 +125,8 @@
 	  								process="@this"/>
 	  						</p:column>
 	  						
-	  				
 	  				</p:dataTable>
-				
+	  							
 			</h:form>
 		</p:panel>
 	</ui:define>
