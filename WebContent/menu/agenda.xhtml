@@ -58,9 +58,14 @@
                 		<p:dataExporter type="xls" target="tbl" fileName="agenda" />
             		</h:commandLink>
  
+            		<!--*******************************************************
+            		 Para exportar em pdf e corrigir problemas com acentuação
+            		adicionar a ***encoding="iso-8859-1"*** no <p:dataExporter>
+            		conform é apresentado abaixo. 
+            		********************************************************-->
             		<h:commandLink immediate="true">
                 		<p:graphicImage url="/img/pdf.png" width="24"/>
-                		<p:dataExporter type="pdf" target="tbl" fileName="agenda"/>
+                		<p:dataExporter type="pdf" encoding="iso-8859-1" target="tbl" fileName="agenda"/>
             		</h:commandLink>
  
             		<h:commandLink immediate="true">
@@ -74,7 +79,7 @@
             		</h:commandLink>
         		</f:facet>
 	  						
-	  						<p:column >
+	  						<p:column style="width: 100px">
 	  							<f:facet name="header">
 	  								<h:outputText value="Matrícula"/>
 	  							</f:facet>
@@ -88,7 +93,7 @@
 	  							<h:outputText value="#{agenda.nome}" />
 	  						</p:column>
 	  						
-	  						<p:column>
+	  						<p:column style="width: 180px">
 	  							<f:facet name="header">
 	  								<h:outputLabel value="Data de nascimento" />
 	  							</f:facet>
@@ -97,21 +102,21 @@
 	  							</h:outputText>
 	  						</p:column>
 	  						
-	  						<p:column>
+	  						<p:column style="width: 150px">
 	  							<f:facet name="header">
 	  								<h:outputText value="CPF" />
 	  							</f:facet>
 	  							<h:outputText value="#{agenda.CPF}" />
 	  						</p:column>
 	  						
-	  						<p:column>
+	  						<p:column style="width: 100px">
 	  							<f:facet name="header">
 	  								<h:outputText value="Salário" />
 	  							</f:facet>
 	  							<h:outputText value="#{agenda.salario}" />
 	  						</p:column>
 	  						
-	  						<p:column exportable="false">
+	  						<p:column exportable="false" style="width: 100px">
 	  							<p:commandButton 
 	  								icon="fa fa-edit"
 	  								actionListener="#{agendaController.editar(agenda)}"
